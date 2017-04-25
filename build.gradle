@@ -30,4 +30,7 @@ ext {
     supportLibraryVersion = '25.3.1'
     versionCode = 1
     versionName = '1.0'
+    httpcoreVersion = '4.4.4'
+    fastjsonVersion = '1.1.56.android'
+    recyclerviewAnimatorsVersion = '2.2.6'
 }

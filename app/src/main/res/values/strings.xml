@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">LOL Heroes</string>
+    <string name="app_name">LOL英雄</string>
+    <string name="drawer_menu_all">全部</string>
+    <string name="drawer_menu_fighter">战士</string>
+    <string name="drawer_menu_mage">法师</string>
+    <string name="drawer_menu_assassin">刺客</string>
+    <string name="drawer_menu_tank">坦克</string>
+    <string name="drawer_menu_marksman">射手</string>
+    <string name="drawer_menu_support">辅助</string>
+    <string name="drawer_menu_heroes_type_title">英雄分类</string>
+    <string name="drawer_header_user_img">用户登录</string>
+    <string name="drawer_header_user_not_login">未登录</string>
 </resources>

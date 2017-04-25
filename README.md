@@ -13,3 +13,7 @@ http://lol.qq.com/web201310/info-defail.shtml?id=Veigar
 参考资料
 --------------
 https://github.com/googlesamples/android-architecture/tree/todo-mvp
+
+https://github.com/alibaba/fastjson
+
+https://github.com/wasabeef/recyclerview-animators

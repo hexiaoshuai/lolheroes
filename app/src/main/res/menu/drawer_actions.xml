@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/drawer_menu_heroes_type_title">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/drawer_menu_all"
+                    android:icon="@drawable/ic_hero"
+                    android:checked="true"
+                    android:title="@string/drawer_menu_all" />
+                <item
+                    android:id="@+id/drawer_menu_fighter"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_fighter" />
+                <item
+                    android:id="@+id/drawer_menu_mage"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_mage" />
+                <item
+                    android:id="@+id/drawer_menu_assassin"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_assassin" />
+                <item
+                    android:id="@+id/drawer_menu_tank"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_tank" />
+                <item
+                    android:id="@+id/drawer_menu_marksman"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_marksman" />
+                <item
+                    android:id="@+id/drawer_menu_support"
+                    android:icon="@drawable/ic_hero"
+                    android:title="@string/drawer_menu_support" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
