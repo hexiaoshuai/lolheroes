@@ -1,5 +1,6 @@
 package cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.heroes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.R;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.Hero;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.herodetail.HeroDetailActivity;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.ActivityUtils;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.AssetsUtil;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
@@ -25,7 +27,8 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 public class HeroesFragment extends Fragment implements HeroesContract.View {
 
     private HeroesContract.Presenter heroesPresenter;
-    private RecyclerView rv_list;
+    private RecyclerView recyclerView;
+    private GridLayoutManager gridLayoutManager;
 
     private static final String URL_HEAD = "champion/";
 
@@ -58,9 +61,9 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_heroes, container, false);
 
-        rv_list = (RecyclerView) root.findViewById(R.id.rv_list);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), getSpanCount());
-        rv_list.setLayoutManager(gridLayoutManager);
+        recyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
+        gridLayoutManager = new GridLayoutManager(getContext(), getSpanCount());
+        recyclerView.setLayoutManager(gridLayoutManager);
         setHasOptionsMenu(true);
         return root;
     }
@@ -91,8 +94,9 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
         HeroRecyclerAdapter heroRecyclerAdapter = new HeroRecyclerAdapter(heroList);
         heroRecyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(Hero hero) {
+            public void onItemClick(Hero hero, int position) {
                 heroesPresenter.openHeroDetails(hero);
+                heroesPresenter.setPosition(position);
             }
         });
 
@@ -100,12 +104,18 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
         animationAdapter.setFirstOnly(false);
         animationAdapter.setInterpolator(new OvershootInterpolator());
         animationAdapter.setDuration(800);
-        rv_list.setAdapter(animationAdapter);
+        recyclerView.setAdapter(animationAdapter);
+    }
+
+    public void scrollToPosition(int position) {
+        recyclerView.scrollToPosition(position);
     }
 
     @Override
     public void showHeroDetailsUi(String id) {
-
+        Intent intent = new Intent(getActivity(), HeroDetailActivity.class);
+        intent.putExtra("heroId", id);
+        startActivity(intent);
     }
 
     @Override
@@ -120,10 +130,10 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
     }
 
     interface OnItemClickListener {
-        void onItemClick(Hero hero);
+        void onItemClick(Hero hero, int position);
     }
 
-    private class MyAnimationAdapter extends ScaleInAnimationAdapter{
+    private class MyAnimationAdapter extends ScaleInAnimationAdapter {
         private RecyclerView.Adapter adapter;
 
         MyAnimationAdapter(RecyclerView.Adapter adapter) {
@@ -173,7 +183,7 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
                 cv_hero.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onItemClickListener.onItemClick(hero);
+                        onItemClickListener.onItemClick(hero, gridLayoutManager.findFirstCompletelyVisibleItemPosition());
                     }
                 });
             }

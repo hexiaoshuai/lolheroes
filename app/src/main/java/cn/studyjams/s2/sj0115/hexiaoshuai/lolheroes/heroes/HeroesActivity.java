@@ -27,6 +27,7 @@ public class HeroesActivity extends AppCompatActivity {
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
 
     private DrawerLayout drawerLayout;
+    private HeroesFragment heroesFragment;
     private HeroesPresenter heroesPresenter;
     private AppBarLayout appBarLayout;
     private MenuItem allHeroes;
@@ -64,15 +65,14 @@ public class HeroesActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
             allHeroes = navigationView.getMenu().findItem(R.id.drawer_menu_all);
         }
-        HeroesFragment mHeroesFragment =
-                (HeroesFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_layout);
-        if (mHeroesFragment == null) {
-            mHeroesFragment = HeroesFragment.newInstance();
+        heroesFragment = (HeroesFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_layout);
+        if (heroesFragment == null) {
+            heroesFragment = HeroesFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), mHeroesFragment, R.id.content_frame_layout);
+                    getSupportFragmentManager(), heroesFragment, R.id.content_frame_layout);
         }
 
-        heroesPresenter = new HeroesPresenter(HeroesRepository.getInstance(HeroesLocalDataSource.getInstance(getApplicationContext())), mHeroesFragment);
+        heroesPresenter = new HeroesPresenter(HeroesRepository.getInstance(HeroesLocalDataSource.getInstance(getApplicationContext())), heroesFragment);
 
         if (savedInstanceState != null) {
             HeroFilterType currentFiltering =
@@ -120,6 +120,7 @@ public class HeroesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         showToolBar();
+        heroesFragment.scrollToPosition(heroesPresenter.getPosition());
     }
 
     @Override

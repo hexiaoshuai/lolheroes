@@ -22,6 +22,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity android:name=".herodetail.HeroDetailActivity" />
     </application>
 
 </manifest>

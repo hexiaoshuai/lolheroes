@@ -26,5 +26,9 @@ interface HeroesContract {
         HeroFilterType getFiltering();
 
         void setSearchText(String search);
+
+        void setPosition(int position);
+
+        int getPosition();
     }
 }

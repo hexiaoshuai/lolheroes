@@ -14,6 +14,7 @@ class HeroesPresenter implements HeroesContract.Presenter {
 
     private HeroFilterType mCurrentFiltering = HeroFilterType.ALL;
     private String searchText = null;
+    private int position = 0;
 
     HeroesPresenter(HeroesRepository mHeroesRepository, HeroesContract.View heroesView) {
         this.heroesRepository = mHeroesRepository;
@@ -129,5 +130,15 @@ class HeroesPresenter implements HeroesContract.Presenter {
     public void setSearchText(String search) {
         this.searchText = search;
         loadHeroes(false);
+    }
+
+    @Override
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public int getPosition() {
+        return position;
     }
 }
