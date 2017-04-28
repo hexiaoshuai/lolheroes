@@ -61,21 +61,4 @@ public class Hero {
     public void setImage(Image image) {
         this.image = image;
     }
-
-    public class Image {
-        public Image() {
-            super();
-        }
-
-        private String full;
-
-        public String getFull() {
-            return full;
-        }
-
-        public void setFull(String full) {
-            this.full = full;
-        }
-    }
 }
-

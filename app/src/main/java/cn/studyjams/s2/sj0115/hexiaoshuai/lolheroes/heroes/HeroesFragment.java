@@ -6,9 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
@@ -61,7 +58,7 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_heroes, container, false);
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
+        recyclerView = (RecyclerView) root.findViewById(R.id.heroes_recycler_view);
         gridLayoutManager = new GridLayoutManager(getContext(), getSpanCount());
         recyclerView.setLayoutManager(gridLayoutManager);
         setHasOptionsMenu(true);
@@ -76,17 +73,6 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
             spanCount = 6;
         }
         return spanCount;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return true;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
     }
 
     @Override

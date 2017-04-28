@@ -1,6 +1,7 @@
 package cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.herodetail;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,11 +9,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.R;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.source.HeroDetailRepository;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.source.local.HeroDetailLocalDataSource;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.ActivityUtils;
 
 
 public class HeroDetailActivity extends AppCompatActivity {
 
-    private TextView toolbarTitle;
+    private HeroDetailPresenter heroDetailPresenter;
+    private HeroDetailFragment heroDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +25,6 @@ public class HeroDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hero_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -29,8 +33,13 @@ public class HeroDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-
-        toolbarTitle.setText(getIntent().getStringExtra("heroId"));
+        heroDetailFragment = (HeroDetailFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_layout);
+        if (heroDetailFragment == null) {
+            heroDetailFragment = HeroDetailFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), heroDetailFragment, R.id.content_frame_layout);
+        }
+        heroDetailPresenter = new HeroDetailPresenter(HeroDetailRepository.getInstance(HeroDetailLocalDataSource.getInstance(getApplicationContext())), heroDetailFragment);
     }
 
 

@@ -16,8 +16,8 @@ class HeroesPresenter implements HeroesContract.Presenter {
     private String searchText = null;
     private int position = 0;
 
-    HeroesPresenter(HeroesRepository mHeroesRepository, HeroesContract.View heroesView) {
-        this.heroesRepository = mHeroesRepository;
+    HeroesPresenter(HeroesRepository heroesRepository, HeroesContract.View heroesView) {
+        this.heroesRepository = heroesRepository;
         this.heroesView = heroesView;
         this.heroesView.setPresenter(this);
     }
