@@ -27,4 +27,5 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "jp.wasabeef:recyclerview-animators:$rootProject.recyclerviewAnimatorsVersion"
+    compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 }

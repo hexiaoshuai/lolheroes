@@ -17,3 +17,7 @@ https://github.com/googlesamples/android-architecture/tree/todo-mvp
 https://github.com/alibaba/fastjson
 
 https://github.com/wasabeef/recyclerview-animators
+
+https://github.com/square/picasso
+
+https://github.com/googlecodelabs/android-design-library

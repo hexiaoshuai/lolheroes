@@ -7,4 +7,6 @@
     </style>
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppThemeHeroDetail" parent="AppTheme" />
 </resources>

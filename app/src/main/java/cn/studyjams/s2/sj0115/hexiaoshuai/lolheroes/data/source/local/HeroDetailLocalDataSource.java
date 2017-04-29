@@ -31,6 +31,7 @@ public class HeroDetailLocalDataSource implements HeroDetailDataSource {
         if (heroDetail == null) {
             callback.onDataNotAvailable();
         } else {
+            heroDetail.setLore("\u3000\u3000" + heroDetail.getLore().replace("<br>", "\n\u3000\u3000"));
             callback.onHeroDetailLoaded(heroDetail);
         }
 

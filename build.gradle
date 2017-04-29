@@ -33,4 +33,5 @@ ext {
     httpcoreVersion = '4.4.4'
     fastjsonVersion = '1.1.56.android'
     recyclerviewAnimatorsVersion = '2.2.6'
+    picassoVersion = '2.5.2'
 }
