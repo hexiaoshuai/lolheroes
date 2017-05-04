@@ -19,13 +19,9 @@ import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.AssetsUtil;
 
 public class HeroDetailFragment extends Fragment implements HeroDetailContract.View {
     private HeroDetailContract.Presenter heroDetailPresenter;
-    private TextView loreTextView, allyTipsTextView, enemyTipsTextView;
+    private TextView loreTextView, allyTipsTextView, enemyTipsTextView, tv_spell_name, tv_spell_type, tv_spell;
     private ImageView iv_b, iv_q, iv_w, iv_e, iv_r;
-
     private HeroDetail heroDetail;
-    private TextView tv_spell_name, tv_spell_type, tv_spell, nameTextView, tagsTextView, attackTextView,
-            defenseTextView;
-    private int spellsIndex = -1;
 
     public HeroDetailFragment() {
 
@@ -63,17 +59,9 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
         iv_w = (ImageView) root.findViewById(R.id.iv_w);
         iv_e = (ImageView) root.findViewById(R.id.iv_e);
         iv_r = (ImageView) root.findViewById(R.id.iv_r);
-
-        nameTextView = (TextView) root.findViewById(R.id.text_view_name);
-        tagsTextView = (TextView) root.findViewById(R.id.text_view_tags);
-        attackTextView = (TextView) root.findViewById(R.id.text_view_attack);
-        defenseTextView = (TextView) root.findViewById(R.id.defense);
-        TextView magic = (TextView) root.findViewById(R.id.magic);
-        TextView difficulty = (TextView) root.findViewById(R.id.difficulty);
         tv_spell_name = (TextView) root.findViewById(R.id.tv_spell_name);
         tv_spell_type = (TextView) root.findViewById(R.id.tv_spell_type);
         tv_spell = (TextView) root.findViewById(R.id.tv_spell);
-
     }
 
     @Override
@@ -88,9 +76,56 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
         iv_w.setImageBitmap(AssetsUtil.getImage(getContext(), "spell/" + heroDetail.getSpells().get(1).getImage().getFull()));
         iv_e.setImageBitmap(AssetsUtil.getImage(getContext(), "spell/" + heroDetail.getSpells().get(2).getImage().getFull()));
         iv_r.setImageBitmap(AssetsUtil.getImage(getContext(), "spell/" + heroDetail.getSpells().get(3).getImage().getFull()));
+        iv_b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_spells(view, R.string.tv_b, -1);
+            }
+        });
+        iv_q.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_spells(view, R.string.tv_q, 0);
+            }
+        });
+        iv_w.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_spells(view, R.string.tv_w, 1);
+            }
+        });
+        iv_e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_spells(view, R.string.tv_e, 2);
+            }
+        });
+        iv_r.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_spells(view, R.string.tv_r, 3);
+            }
+        });
+        update_spells(iv_b, R.string.tv_b, -1);
     }
 
-    private String replaceString(String str){
+    private void update_spells(View view, int typeId, int spellsIndex) {
+        iv_b.setAlpha(0.3f);
+        iv_q.setAlpha(0.3f);
+        iv_w.setAlpha(0.3f);
+        iv_e.setAlpha(0.3f);
+        iv_r.setAlpha(0.3f);
+        view.setAlpha(1f);
+        if (view == iv_b) {
+            tv_spell_name.setText(heroDetail.getPassive().getName());
+        } else {
+            tv_spell_name.setText(heroDetail.getSpells().get(spellsIndex).getName());
+        }
+        tv_spell_type.setText(getResources().getText(typeId));
+        tv_spell.setText(getSpell(heroDetail, spellsIndex));
+    }
+
+    private String replaceString(String str) {
         return str.replace("<br>", "\n\u3000\u3000").replaceAll("</?[^>]+>", "");
     }
 

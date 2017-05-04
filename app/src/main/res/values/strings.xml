@@ -10,4 +10,13 @@
     <string name="drawer_menu_heroes_type_title">英雄分类</string>
     <string name="drawer_header_user_img">用户登录</string>
     <string name="drawer_header_user_not_login">未登录</string>
+    <string name="tv_b">被动技能</string>
+    <string name="tv_q">快捷键：Q</string>
+    <string name="tv_w">快捷键：W</string>
+    <string name="tv_e">快捷键：E</string>
+    <string name="tv_r">快捷键：R</string>
+    <string name="attack">物理攻击</string>
+    <string name="defense">防御能力</string>
+    <string name="magic">魔法攻击</string>
+    <string name="difficulty">上手难度</string>
 </resources>

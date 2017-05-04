@@ -28,6 +28,9 @@ class HeroDetailPresenter implements HeroDetailContract.Presenter {
         heroDetailRepository.getHeroDetail(heroId, new HeroDetailDataSource.LoadHeroDetailCallback() {
             @Override
             public void onHeroDetailLoaded(HeroDetail heroDetail) {
+                if(!heroDetailView.isActive()){
+                    return;
+                }
                 heroDetailView.showHeroDetail(heroDetail);
             }
 

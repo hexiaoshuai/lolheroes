@@ -19,7 +19,7 @@ import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.Hero;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.herodetail.HeroDetailActivity;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.ActivityUtils;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.AssetsUtil;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 
 public class HeroesFragment extends Fragment implements HeroesContract.View {
 
@@ -119,7 +119,7 @@ public class HeroesFragment extends Fragment implements HeroesContract.View {
         void onItemClick(Hero hero, int position);
     }
 
-    private class MyAnimationAdapter extends ScaleInAnimationAdapter {
+    private class MyAnimationAdapter extends SlideInBottomAnimationAdapter {
         private RecyclerView.Adapter adapter;
 
         MyAnimationAdapter(RecyclerView.Adapter adapter) {

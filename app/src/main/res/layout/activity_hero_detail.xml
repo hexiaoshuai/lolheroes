@@ -39,12 +39,13 @@
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:background="#99000000"
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_marginTop="45dp"
                         android:id="@+id/text_view_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,26 +76,30 @@
 
                         <TextView
                             android:id="@+id/text_view_attack"
+                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/magic"
+                            android:id="@+id/text_view_magic"
+                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/defense"
+                            android:id="@+id/text_view_defense"
+                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/difficulty"
+                            android:id="@+id/text_view_difficulty"
+                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
