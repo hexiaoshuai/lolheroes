@@ -33,6 +33,8 @@ public class HeroDetailActivity extends AppCompatActivity {
     private TextView text_view_name, text_view_tags, text_view_attack,
             text_view_magic, text_view_defense, text_view_difficulty;
     private FloatingActionButton floatingActionButton;
+    private HeroDetailFragment heroDetailFragment;
+    private int skinIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +49,26 @@ public class HeroDetailActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        initAppLayout();
-        HeroDetailFragment heroDetailFragment = (HeroDetailFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_layout);
+        initAppBarLayout();
+        heroDetailFragment = (HeroDetailFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_layout);
         if (heroDetailFragment == null) {
             heroDetailFragment = HeroDetailFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(), heroDetailFragment, R.id.content_frame_layout);
         }
         new HeroDetailPresenter(HeroDetailRepository.getInstance(HeroDetailLocalDataSource.getInstance(getApplicationContext())), heroDetailFragment);
+        if (savedInstanceState != null) {
+            skinIndex  = savedInstanceState.getInt("skin_index");
+        }
     }
 
-    private void initAppLayout() {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("skin_index", skinIndex);
+    }
+
+    private void initAppBarLayout() {
         skinImageView = (ImageView) findViewById(R.id.image_view_skin);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         text_view_name = (TextView) findViewById(R.id.text_view_name);
@@ -67,10 +78,11 @@ public class HeroDetailActivity extends AppCompatActivity {
         text_view_defense = (TextView) findViewById(R.id.text_view_defense);
         text_view_difficulty = (TextView) findViewById(R.id.text_view_difficulty);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+
     }
 
-    public void updateCollapsingToolbar(HeroDetail heroDetail) {
-        setSkin(heroDetail, 0);
+    public void updateCollapsingToolbar(final HeroDetail heroDetail) {
+        setSkin(heroDetail, skinIndex);
         collapsingToolbar.setCollapsedTitleGravity(Gravity.START);
         collapsingToolbar.setExpandedTitleGravity(Gravity.BOTTOM | Gravity.CENTER);
         text_view_name.setText(heroDetail.getTitle());
@@ -82,14 +94,12 @@ public class HeroDetailActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                heroDetailFragment.showHeroSkinListDialog(heroDetail);
             }
         });
     }
 
-    private void showHeroSkinListDialog(){
 
-    }
     private String tagToString(List<String> tags) {
         String string = "";
         for (String tag : tags) {
@@ -117,11 +127,12 @@ public class HeroDetailActivity extends AppCompatActivity {
         return string;
     }
 
-    private void setSkin(HeroDetail heroDetail, int position) {
+    public void setSkin(HeroDetail heroDetail, int position) {
+        skinIndex = position;
         setSkinImageView(heroDetail.getSkins().get(position).getId(), skinImageView);
         if (position == 0) {
             collapsingToolbar.setTitle(heroDetail.getName());
-        }else {
+        } else {
             collapsingToolbar.setTitle(heroDetail.getSkins().get(position).getName());
         }
     }

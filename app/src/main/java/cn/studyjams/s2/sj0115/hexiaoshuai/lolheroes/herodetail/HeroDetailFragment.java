@@ -2,6 +2,9 @@ package cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.herodetail;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,9 @@ import java.util.List;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.R;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.HeroDetail;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.LevelTip;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.Skin;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.data.Spells;
+import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.ActivityUtils;
 import cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes.util.AssetsUtil;
 
 public class HeroDetailFragment extends Fragment implements HeroDetailContract.View {
@@ -22,6 +27,7 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
     private TextView loreTextView, allyTipsTextView, enemyTipsTextView, tv_spell_name, tv_spell_type, tv_spell;
     private ImageView iv_b, iv_q, iv_w, iv_e, iv_r;
     private HeroDetail heroDetail;
+    private AlertDialog dialog;
 
     public HeroDetailFragment() {
 
@@ -62,6 +68,17 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
         tv_spell_name = (TextView) root.findViewById(R.id.tv_spell_name);
         tv_spell_type = (TextView) root.findViewById(R.id.tv_spell_type);
         tv_spell = (TextView) root.findViewById(R.id.tv_spell);
+    }
+
+
+    private int getSpanCount() {
+        int spanCount;
+        if (ActivityUtils.isScreenOrientationPortrait(getContext())) {
+            spanCount = 4;
+        } else {
+            spanCount = 5;
+        }
+        return spanCount;
     }
 
     @Override
@@ -168,6 +185,81 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
     @Override
     public void setPresenter(HeroDetailContract.Presenter presenter) {
         heroDetailPresenter = presenter;
+    }
+
+    public void showHeroSkinListDialog(final HeroDetail heroDetail) {
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_hero_skins, null);
+        RecyclerView recyclerView = (RecyclerView) dialogView.findViewById(R.id.skins_recycler_view);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), getSpanCount());
+        recyclerView.setLayoutManager(gridLayoutManager);
+        SkinsRecyclerAdapter adapter = new SkinsRecyclerAdapter(heroDetail.getSkins());
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                dialog.dismiss();
+                ((HeroDetailActivity) getActivity()).setSkin(heroDetail, position);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(dialogView);
+        dialog = builder.show();
+        //Snackbar.make(getView(), "test", Snackbar.LENGTH_LONG).show();
+    }
+
+    interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private class SkinsViewHolder extends RecyclerView.ViewHolder {
+        SkinsViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    private class SkinsRecyclerAdapter extends RecyclerView.Adapter<SkinsViewHolder> {
+        private List<Skin> list;
+        private OnItemClickListener onItemClickListener;
+
+        void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
+        }
+
+        SkinsRecyclerAdapter(List<Skin> list) {
+            this.list = list;
+        }
+
+        @Override
+        public SkinsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_skin, parent, false);
+            return new SkinsViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(SkinsViewHolder holder, final int position) {
+            final Skin skin = list.get(position);
+            View cv_skin = holder.itemView.findViewById(R.id.item_card_view_skin);
+            ImageView iv_skin = (ImageView) holder.itemView.findViewById(R.id.item_image_view_skin);
+            TextView tv_skin = (TextView) holder.itemView.findViewById(R.id.item_text_view_skin);
+            iv_skin.setImageBitmap(AssetsUtil.getImage(getContext(), "skin/small" + skin.getId() + ".jpg"));
+            tv_skin.setText(skin.getName());
+            if(position == 0){
+                tv_skin.setText(heroDetail.getName());
+            }
+            if (onItemClickListener != null) {
+                cv_skin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onItemClick(position);
+                    }
+                });
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
     }
 }
 
