@@ -23,7 +23,7 @@
             app:collapsedTitleGravity="center"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:expandedTitleTextAppearance="@style/ExpandedText"
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title">
 
             <RelativeLayout

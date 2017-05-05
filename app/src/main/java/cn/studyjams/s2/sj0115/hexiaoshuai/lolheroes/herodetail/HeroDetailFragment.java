@@ -240,12 +240,7 @@ public class HeroDetailFragment extends Fragment implements HeroDetailContract.V
             final Skin skin = list.get(position);
             View cv_skin = holder.itemView.findViewById(R.id.item_card_view_skin);
             ImageView iv_skin = (ImageView) holder.itemView.findViewById(R.id.item_image_view_skin);
-            TextView tv_skin = (TextView) holder.itemView.findViewById(R.id.item_text_view_skin);
             iv_skin.setImageBitmap(AssetsUtil.getImage(getContext(), "skin/small" + skin.getId() + ".jpg"));
-            tv_skin.setText(skin.getName());
-            if(position == 0){
-                tv_skin.setText(heroDetail.getName());
-            }
             if (onItemClickListener != null) {
                 cv_skin.setOnClickListener(new View.OnClickListener() {
                     @Override

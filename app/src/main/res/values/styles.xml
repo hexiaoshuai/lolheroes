@@ -9,4 +9,8 @@
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppThemeHeroDetail" parent="AppTheme" />
+
+    <style name="ExpandedText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
 </resources>
