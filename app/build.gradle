@@ -29,3 +29,5 @@ dependencies {
     compile "jp.wasabeef:recyclerview-animators:$rootProject.recyclerviewAnimatorsVersion"
     compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 }
+
+apply plugin: 'com.google.gms.google-services'

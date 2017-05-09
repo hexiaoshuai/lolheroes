@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "361161848985",
+    "firebase_url": "https://lolheroes-bc73a.firebaseio.com",
+    "project_id": "lolheroes-bc73a",
+    "storage_bucket": "lolheroes-bc73a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361161848985:android:c70c7775fa7df436",
+        "android_client_info": {
+          "package_name": "cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361161848985-6hj3uhg3uio7adqco0qcammoq14ha8d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cn.studyjams.s2.sj0115.hexiaoshuai.lolheroes",
+            "certificate_hash": "cb437400c3f182e9a407c41b4f5e80aeb17944b0"
+          }
+        },
+        {
+          "client_id": "361161848985-dkgri33irp7hfgma15k9f4pq6l1bdm60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv1b0LCcBk8_CxeqCKcAjvqGuAvl70qDM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361161848985-dkgri33irp7hfgma15k9f4pq6l1bdm60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
