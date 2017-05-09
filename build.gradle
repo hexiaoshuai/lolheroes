@@ -29,8 +29,8 @@ ext {
     compileSdkVersion = 25
     buildToolsVersion = '25.0.2'
     supportLibraryVersion = '25.3.1'
-    versionCode = 1
-    versionName = '1.0'
+    versionCode = 2
+    versionName = '2.0'
     httpcoreVersion = '4.4.4'
     fastjsonVersion = '1.1.56.android'
     recyclerviewAnimatorsVersion = '2.2.6'
