@@ -20,4 +20,4 @@ https://github.com/wasabeef/recyclerview-animators
 
 https://github.com/square/picasso
 
-https://github.com/googlecodelabs/android-design-library111
+https://github.com/googlecodelabs/android-design-library111222
